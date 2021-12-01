@@ -2,26 +2,29 @@ const connection = require("./db/connection");
 const {addMovie, listMovies} = require('./utils');
 
 const command = process.argv[2];
+const yargs = require('yargs');
 
 const app = async () => {
     if(command === 'add'){
-        const newMovie = {
-            title: process.argv[3],
-            actor: process.argv[4],
-            rating: process.argv[5], 
-        };
-        await connection(addMovie, newMovie);
+        const movies = [
+        newMovie = {
+            title: yargs.argv.title,
+            actor: yargs.argv.actor,
+            rating: yargs.argv.rating, 
+        }]
+        await connection(addMovie, movies);
     }
     else if(command === 'add multi'){
-        const newMovie1 = {
-            title: process.argv[3],
-            actor: process.argv[4],
-            rating: process.argv[5], 
+
+        newMovie1 = {
+            title: yargs.argv.title1,
+            actor: yargs.argv.actor1,
+            rating: yargs.argv.rating1, 
         };
-        const newMovie2 = {
-            title: process.argv[6],
-            actor: process.argv[7],
-            rating: process.argv[8], 
+        newMovie2 = {
+            title: yargs.argv.title2,
+            actor: yargs.argv.actor2,
+            rating: yargs.argv.rating2, 
         };
         await connection(addMovie, newMovie1);
         await connection(addMovie, newMovie2);

@@ -1,7 +1,8 @@
-// instead of using const to declare the variable use exports.'varName'
+// instead of using const to declare the variable use exports.varName
 exports.addMovie = async (collection, dataObj) => {
     try{
-        await collection.insertOne(dataObj)
+        // insertOne takes an obj whilst insertMany takes an array (of objs)
+        await collection.insertOne(dataObj) // ...or insertMany(dataObjArr)
     }catch(e){
         console.log(e);
     }
