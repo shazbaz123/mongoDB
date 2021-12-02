@@ -8,6 +8,23 @@ exports.addMovie = async (collection, dataObj) => {
     }
 }
 
+exports.removeMovie = async (collection, dataObj) => {
+    try{
+        await collection.deleteMany({title : dataObj})
+    }catch(e){
+        console.log(e);
+    }
+}
+
+exports.updateMovie = async (collection, dataObj) => {
+    try{
+        await collection.updateOne({title : dataObj.title}, {$set: {title : dataObj.newTitle}})
+        console.log(`${dataObj} ${dataObj}`);
+    }catch(e){
+        console.log(e);
+    }
+}
+
 exports.listMovies = async (collection) => {
     try{
         const listAll = await collection.find().toArray();

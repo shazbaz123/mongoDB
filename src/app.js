@@ -1,18 +1,17 @@
 const connection = require("./db/connection");
-const {addMovie, listMovies} = require('./utils');
+const {addMovie, listMovies, removeMovie, updateMovie} = require('./utils');
 
 const command = process.argv[2];
 const yargs = require('yargs');
 
 const app = async () => {
     if(command === 'add'){
-        const movies = [
         newMovie = {
             title: yargs.argv.title,
             actor: yargs.argv.actor,
             rating: yargs.argv.rating, 
-        }]
-        await connection(addMovie, movies);
+        };
+        await connection(addMovie, newMovie);
     }
     else if(command === 'add multi'){
 
@@ -28,6 +27,16 @@ const app = async () => {
         };
         await connection(addMovie, newMovie1);
         await connection(addMovie, newMovie2);
+    }
+    else if(command === 'remove'){
+        await connection(removeMovie, yargs.argv.title)
+    }
+    else if(command === 'update'){
+        const movie = {
+            title: yargs.argv.title,
+            newTitle: yargs.argv.newTitle,
+        }
+        await connection(updateMovie, movie)
     }
     else if (command === 'list'){
         await connection(listMovies);
